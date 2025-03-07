@@ -1,4 +1,3 @@
-
 "use client"; 
 
 import './globals.css'; 
@@ -11,14 +10,22 @@ const Layout = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        setIsAuthenticated(!!token);
+        const checkAuth = () => {
+            const token = localStorage.getItem('access_token');
+            setIsAuthenticated(!!token);
+        };
+
+        checkAuth();
+
+        const interval = setInterval(checkAuth, 1000); 
+
+        return () => clearInterval(interval);
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('access_token'); // Clear token on logout
-        setIsAuthenticated(false); // Update state
-        router.push('/'); // Redirect to home after logout
+        localStorage.removeItem('access_token');
+        setIsAuthenticated(false); 
+        router.push('/');
     };
 
     return (

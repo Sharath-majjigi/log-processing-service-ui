@@ -9,3 +9,5 @@ services:
       - "4000:4000"  
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:5001
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
